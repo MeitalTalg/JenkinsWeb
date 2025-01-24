@@ -11,19 +11,20 @@ pipeline {
                     sh 'sudo dnf install -y httpd.x86_64'
                     sh 'sudo systemctl start httpd.service'
                     sh 'sudo systemctl enable httpd.service'
+                        }
                     }
                 }
-            }
 
-            steps {
-                script {
-                    echo 'Test if there is syntax error in the html file'
-                    sh 'sudo npm install htmlhint --save-dev'
-                    sh 'sudo htmlhint /home/ec2-user/workspace/Web-Starter/index.html'
-                    
+            stage ('Test index.html file') {
+                steps {
+                    script {
+                        echo 'Test if there is syntax error in the html file'
+                        sh 'sudo npm install htmlhint --save-dev'
+                        sh 'sudo htmlhint /home/ec2-user/workspace/Web-Starter/index.html'
+                        
+                         }
                     }
                 }
-            }
         
             stage('Insert index.html') {
                 steps {
@@ -39,10 +40,8 @@ pipeline {
                     script {
                         echo 'Test if its works'
                         sh 'sudo curl http://localhost:80'
+                        }
                     }
                 }
-            }
-
-        
-    }
+        }
 }
