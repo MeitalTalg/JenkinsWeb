@@ -19,7 +19,7 @@ pipeline {
                 steps {
                     script {
                         echo 'Test if there is syntax error in the html file'
-                        sh 'sudo dnf install tidy'
+                        sh 'sudo dnf install tidy -y'
                         sh 'sudo tidy /home/ec2-user/workspace/Web-Starter/index.html'
                         
                          }
