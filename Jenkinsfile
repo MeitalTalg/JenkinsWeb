@@ -6,8 +6,8 @@ pipeline {
             steps {
                 script {
                     echo 'Installing Apache'
-                    sh 'sudo -S dnf update -y'
-                    sh 'sudo -S dnf list | grep httpd'
+                    sh 'sudo dnf update -y'
+                    sh 'sudo dnf list | grep httpd'
                     sh 'sudo dnf install -y httpd.x86_64'
                     sh 'sudo systemctl start httpd.service'
                     sh 'sudo systemctl enable httpd.service'
@@ -19,8 +19,8 @@ pipeline {
                 steps {
                     script {
                         echo 'Test if there is syntax error in the html file'
-                        sh 'sudo npm install htmlhint --save-dev'
-                        sh 'sudo htmlhint /home/ec2-user/workspace/Web-Starter/index.html'
+                        sh 'sudo dnf install tidy'
+                        sh 'sudo tidy /home/ec2-user/workspace/Web-Starter/index.html'
                         
                          }
                     }
